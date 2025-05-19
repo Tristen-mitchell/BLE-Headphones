@@ -1,0 +1,18 @@
+#include "AudioTools.h"          // install “Arduino AudioTools” library
+#include "BluetoothA2DPSink.h"   // install “ESP32-A2DP” library
+
+// Create an AnalogAudioStream sink (internal DAC on GPIO25 & GPIO26)
+AnalogAudioStream out;
+BluetoothA2DPSink    a2dp_sink(out);
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial) { delay(10); }   // optional: wait for USB-serial
+
+  // Start Bluetooth A2DP sink as “ESP32_InternalDAC”
+  a2dp_sink.start("ESP32_InternalDAC");
+}
+
+void loop() {
+  // audio is sent automatically to the internal DAC
+}
